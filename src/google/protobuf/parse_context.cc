@@ -655,6 +655,7 @@ template <typename T>
 const char* FixedParser(void* object, Arena* arena, const char* ptr,
                         ParseContext* ctx) {
   int size = ReadSize(&ptr);
+  if (!ptr) return nullptr;
   return ctx->ReadPackedFixed(ptr, arena, size,
                               static_cast<RepeatedField<T>*>(object));
 }

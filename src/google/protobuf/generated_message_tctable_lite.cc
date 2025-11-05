@@ -885,6 +885,7 @@ PROTOBUF_ALWAYS_INLINE const char* TcParser::PackedFixed(
   SyncHasbits(msg, hasbits, table);
   auto& field = RefAt<RepeatedField<LayoutType>>(msg, data.offset());
   int size = ReadSize(&ptr);
+  if (ABSL_PREDICT_FALSE(!ptr)) return nullptr;
   // TODO: add a tailcalling variant of ReadPackedFixed.
   return ctx->ReadPackedFixed(ptr, msg->GetArena(), size,
                               static_cast<RepeatedField<LayoutType>*>(&field));
